@@ -13,6 +13,7 @@ digraph "Stdlib Dependency Graph" {
 	subgraph cluster_2 {
 		node [color=white style=filled]
 		color=lightgrey style=filled
+		avro
 		constraint
 		crypto
 		"data.xmldata"
@@ -42,6 +43,7 @@ digraph "Stdlib Dependency Graph" {
 		color=lightgrey style=filled
 		auth
 		"data.jsondata"
+		edi
 		email
 		jwt
 		mqtt
@@ -60,6 +62,7 @@ digraph "Stdlib Dependency Graph" {
 		node [color=white style=filled]
 		color=lightgrey style=filled
 		grpc
+		soap
 		transaction
 		websocket
 		websub
@@ -70,10 +73,10 @@ digraph "Stdlib Dependency Graph" {
 		node [color=white style=filled]
 		color=lightgrey style=filled
 		graphql
-		soap
 		sql
 		label="level 7"
 	}
+	io -> avro
 	io -> "data.xmldata"
 	io -> log
 	io -> os
@@ -86,6 +89,8 @@ digraph "Stdlib Dependency Graph" {
 	time -> random
 	time -> task
 	url -> oauth2
+	xmldata -> "asyncapi-tools"
+	xmldata -> "openapi-tools"
 	constraint -> cache
 	crypto -> auth
 	crypto -> jwt
@@ -102,6 +107,10 @@ digraph "Stdlib Dependency Graph" {
 	log -> tcp
 	log -> udp
 	os -> file
+	persist -> "persist.googlesheets"
+	persist -> "persist.inmemory"
+	persist -> "persist.redis"
+	persist -> "persist.sql"
 	protobuf -> grpc
 	random -> grpc
 	random -> mqtt
@@ -115,27 +124,41 @@ digraph "Stdlib Dependency Graph" {
 	cache -> jwt
 	cache -> oauth2
 	file -> "data.jsondata"
+	file -> edi
 	file -> email
 	file -> http
 	file -> toml
 	file -> yaml
+	file -> "edi-tools"
 	mime -> email
 	mime -> http
 	uuid -> grpc
 	uuid -> mqtt
+	uuid -> soap
 	uuid -> transaction
 	uuid -> websocket
 	uuid -> websub
 	uuid -> websubhub
+	uuid -> "persist.redis"
+	uuid -> "asyncapi-tools"
 	auth -> http
 	jwt -> http
 	oauth2 -> http
 	http -> grpc
+	http -> soap
 	http -> transaction
 	http -> websocket
 	http -> websub
 	http -> websubhub
-	transaction -> soap
+	http -> "persist.redis"
+	http -> "asyncapi-tools"
+	grpc -> "openapi-tools"
+	grpc -> "protoc-tools"
 	transaction -> sql
+	transaction -> "persist.googlesheets"
 	websocket -> graphql
+	websub -> "openapi-tools"
+	graphql -> "graphql-tools"
+	graphql -> "openapi-tools"
+	sql -> "persist.sql"
 }
