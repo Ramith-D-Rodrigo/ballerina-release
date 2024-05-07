@@ -119,5 +119,5 @@ jobs:
           echo $command_string
           echo "::set-output name=command::$command_string"
       - name: Clean docker containers
-        run: docker system prune -a -y
+        run: docker system prune -af
 
